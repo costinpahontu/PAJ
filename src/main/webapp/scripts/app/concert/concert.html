@@ -1,0 +1,59 @@
+<div ng-cloak>
+<style>
+    .rating{
+        color: #a9a9a9;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.rating {
+        display: inline-block;
+    }
+
+    .rating li {
+        list-style-type: none;
+        display: inline-block;
+        padding: 1px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .rating .filled {
+        color: #21568b;
+    }
+
+</style>
+    <div class="row">
+
+        <div   style="margin-top:5%;margin-left: 10%;" >
+            <h3>{{concert.nume}}</h3>
+            <div class="row">
+                <img class="col-xs-8" style="width: 500px;"src="../../../assets/images/{{concert.picture}}">
+                <div class="col-xs-4">
+                    <div ng-if="participanti.length > 1"> Cantareti:</div>
+                    <div ng-repeat="participant in participanti">
+                        {{participant.name}}
+                        {{participant.prenume}}
+                    </div>
+                    <div ng-if="participanti.length == 0"> Nu se cunosc participanti</div>
+
+                    <div>
+                        <span class="row"><b >Spectatori</b> : {{concert.attendants}}</span>
+                        <span class="row"><b class="">Data </b>: {{concert.data | date:'medium'}}</span>
+                       <span class="row"> <b class=""> Descriere </b>: {{concert.description}}</span>
+                        <span class="row"><b class=""> Locatie </b>: {{concert.location}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <span>{{concert.name}}</span>
+                <div class="star-rating" star-rating rating-value="rating" disabled="false" data-max="10" on-rating-selected="rateFunction(rating)"></div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
