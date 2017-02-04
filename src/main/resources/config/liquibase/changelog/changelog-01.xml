@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="C_12062015_1" author="costin">
+        <createTable tableName="concerte">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nume" type="varchar(255)"/>
+            <column name="prenume" type="varchar(255)"/>
+            <column name="ratingTag" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="C_12062015_2" author="costin">
+        <createTable tableName="participanti">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nume" type="varchar(255)"/>
+            <column name="prenume" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="C_12062015_3" author="costin">
+        <createTable tableName="participanti_to_concerte">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fk_concert" type="bigint" >
+                    <constraints nullable="false"/>
+             </column>
+            <column name="fk_participant" type="bigint" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="participanti_to_concerte" baseColumnNames="fk_concert" constraintName="fk_concert_1"
+                                 referencedTableName="concerte"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="participanti_to_concerte" baseColumnNames="fk_participant" constraintName="fk_participant_1"
+                                 referencedTableName="participanti"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

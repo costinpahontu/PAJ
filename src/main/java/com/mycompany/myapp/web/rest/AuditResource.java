@@ -1,0 +1,45 @@
+package com.mycompany.myapp.web.rest;
+
+import com.mycompany.myapp.service.AuditEventService;
+
+import java.time.LocalDate;
+import org.springframework.boot.actuate.audit.AuditEvent;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+
+import javax.inject.Inject;
+import java.util.List;
+
+/**
+ * REST controller for getting the audit events.
+ */
+@RestController
+@RequestMapping(value = "/api/audits", produces = MediaType.APPLICATION_JSON_VALUE)
+public class AuditResource {
+
+    private AuditEventService auditEventService;
+
+    @Inject
+    public AuditResource(AuditEventService auditEventService) {
+        this.auditEventService = auditEventService;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<AuditEvent> getAll() {
+        return auditEventService.findAll();
+    }
+
+
+
+    @RequestMapping(value = "/{id:.+}",
+        method = RequestMethod.GET)
+    public ResponseEntity<AuditEvent> get(@PathVariable Long id) {
+        return auditEventService.find(id)
+                .map((entity) -> new ResponseEntity<>(entity, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+}

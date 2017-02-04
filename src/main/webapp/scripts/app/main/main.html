@@ -1,0 +1,22 @@
+<div ng-cloak>
+
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="col-xs-4" ng-repeat="concert in concerte" style="margin-top:5%" ng-click="gotSspecificPage(concert)" ng-if="concert.picture">
+            <div class="row">
+                <img style="    width: 200px;" src="../../../assets/images/{{concert.picture}}">
+
+            </div>
+            <div class="row">
+                <span>{{concert.nume.substr(0,20)}}</span>
+                <span>--{{concert.rating}}</span>
+                <span>--{{concert.concert_type}}</span>
+            </div>
+
+
+        </div>
+
+   </div>
+</div>
